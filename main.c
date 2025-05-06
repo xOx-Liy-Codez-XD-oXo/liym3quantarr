@@ -238,8 +238,8 @@ int main(int argc, char* argv[]) {
 	if(parse.filetype & 0b00000001) { fprintf(infile, "LV_VPIDX16 | "); }
 	if(parse.filetype & 0b00000100) { fprintf(infile, "LV_VNIDX16 | "); }
 	if(parse.filetype & 0b00001000) { fprintf(infile, "LV_TCIDX16 | "); }
-	if(parse.filetype & 0b00100000) { fprintf(infile, "LV_MX | "); }
-	if(parse.filetype & 0b01000000) { fprintf(infile, "LV_VC | "); }
+	if(parse.filetype & 0b01000000) { fprintf(infile, "LV_MX | "); }
+	if(parse.filetype & 0b00100000) { fprintf(infile, "LV_VC | "); }
 	fseeko(infile, -3, SEEK_END);
 	ftruncate(fileno(infile), ftello(infile));
 	fprintf(infile, ", %stricount, vtxfmt,\n", friendlyname);//lol
@@ -258,12 +258,12 @@ int main(int argc, char* argv[]) {
 	} else {
 		fprintf(infile, "		NULL, NULL, NULL,\n");
 	}
-	if(parse.filetype & 0b00100000) {
+	if(parse.filetype & 0b01000000) {
 		fprintf(infile, "		%smtxidx,\n", friendlyname);
 	} else {
 		fprintf(infile, "		NULL,\n");
 	}
-	if(parse.filetype & 0b01000000) {
+	if(parse.filetype & 0b00100000) {
 		fprintf(infile, "		%svertcol);\n", friendlyname);
 	} else {
 		fprintf(infile, "		NULL);\n");
