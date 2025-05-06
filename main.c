@@ -221,7 +221,7 @@ int main(int argc, char* argv[]) {
 
 	char decl[99] = "\nvoid ag_draw_";
 	strcat(decl, friendlyname);
-	strcat(decl, "() {\n");
+	strcat(decl, "(int vtxfmt) {\n");
 	fprintf(infile, decl);
 	
 	if(parse.filetype & 0b00000001) {
@@ -242,7 +242,7 @@ int main(int argc, char* argv[]) {
 	if(parse.filetype & 0b01000000) { fprintf(infile, "LV_VC | "); }
 	fseeko(infile, -3, SEEK_END);
 	ftruncate(fileno(infile), ftello(infile));
-	fprintf(infile, ", %stricount, 0,\n", friendlyname);//lol
+	fprintf(infile, ", %stricount, vtxfmt,\n", friendlyname);//lol
 	if(parse.filetype & 0b00000001) {
 		fprintf(infile, "		NULL, NULL, %svertposidx,\n", friendlyname);
 	} else { 
