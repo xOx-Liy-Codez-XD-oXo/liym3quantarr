@@ -189,8 +189,9 @@ int main(int argc, char* argv[]) {
 		strcat(idxsname, "vertcol[] = {");
 		fprintf(infile, idxsname);
 
-		for(int i = 0; i < parse.tricount * 9; i++) {
-			fprintf(infile, "%d, ", parse.vertcol[i]);
+		for(int i = 0; i < parse.tricount * 9; i++) { //Actually clamp's them liek a boss
+			int clampyclamp = (parse.vertcol[i] > 255) ? 255 : parse.vertcol[i];
+			fprintf(infile, "%d, ", clampyclamp);
 		}
 		fseeko(infile, -2, SEEK_END);
 		int trimpos = ftello(infile);
@@ -295,3 +296,4 @@ int main(int argc, char* argv[]) {
 	return 0;
 
 }
+
